@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<Context docBase="C:\dev\wkss\wks1\parent\demo-war\target\demo-war-0.0.1-SNAPSHOT.war" path="demo-war" cookies="true"  >
+
+	<Manager 
+		className="org.apache.catalina.session.PersistentManager"      
+		debug="0" distributable="false" saveOnRestart="false">        
+			<Store className="org.apache.catalina.session.FileStore"/>    
+	</Manager>
+
+	<!-- pour terracotta websession -->
+		<Valve className="org.terracotta.session.TerracottaTomcat60xSessionValve" tcConfigUrl="localhost:9510,localhost:9550"></Valve>
+
+</Context>

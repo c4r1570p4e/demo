@@ -1,0 +1,27 @@
+Structure d'installation :
+
+C:\dev\terracotta\terracotta-ee-3.5
+C:\dev\apache-tomcat-6.0.30_1
+C:\dev\apache-tomcat-6.0.30_2
+C:\dev\Apache2.2
+
+adapter avec les configs contenues dans \configs
+
+* installer 
+	Eclipse
+	maven 3.0.1
+	m2eclipse
+	postgresql 9.0
+	
+chargement de la BDD via l'application et jakarta-jmeter-2.4, les scripts jmeters contenus dans
+\jmeter
+	executer dans l'ordre	- createUser.jmx
+							- createTag.jmx
+							- creationFavoris.jmx
+
+executer InternetExplorer avec le paramètre  -nomerge pour eviter le partage de session entre 2 instances
+de ie.
+
+
+
+  

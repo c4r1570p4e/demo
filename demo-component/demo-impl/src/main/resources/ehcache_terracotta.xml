@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true" name="cache_simple">
+
+    <diskStore path="java.io.tmpdir"/>
+    
+<terracottaConfig url="localhost:9510,localhost:9550" rejoin="true" />
+
+
+    <defaultCache
+            maxElementsInMemory="0"
+            eternal="false"
+            timeToLiveSeconds="43200"
+            overflowToDisk="false"
+            diskPersistent="false"
+            memoryStoreEvictionPolicy="LRU"
+            statistics="false"
+            />
+       
+        
+    <cache name="org.cl.demo.entity.Tag"
+           maxElementsInMemory="0"
+           eternal="true"
+		   timeToIdleSeconds="0" 
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="false"
+            >
+            
+		<terracotta consistency="eventual" >
+			<nonstop enabled="true" timeoutMillis="2000" immediateTimeout="true" ><timeoutBehavior type="noop" /></nonstop>
+		</terracotta>
+		
+	</cache>            
+
+    <cache name="org.cl.demo.entity.Utilisateur"
+           maxElementsInMemory="0"
+           eternal="true"
+		   timeToIdleSeconds="0" 
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="false"
+            >
+		<terracotta consistency="eventual"  >
+			<!-- 
+			l'application ne permet pas de modifier/supprimer les utilisateurs donc en cas d'indispo on peut se permettre
+			de continuer a utiliser les données du cache car les données présente seront forcement à jour
+			 -->
+			<nonstop enabled="true" timeoutMillis="2000" immediateTimeout="true" ><timeoutBehavior type="localReads" /></nonstop>
+		</terracotta>
+	</cache>            
+
+    <cache name="org.cl.demo.entity.Favoris"
+           maxElementsInMemory="0"
+           eternal="false"
+		   timeToIdleSeconds="0" 
+           timeToLiveSeconds="43200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="false">
+           <!-- 
+ 		   overflowToOffHeap="true"
+           maxMemoryOffHeap="200m"
+           >
+            -->           
+		<terracotta consistency="strong"  >
+			<nonstop enabled="true" timeoutMillis="2000" immediateTimeout="true" ><timeoutBehavior type="noop" /></nonstop>
+		</terracotta>
+	</cache>  
+
+    <cache name="org.cl.demo.entity.Favoris.tags"
+           maxElementsInMemory="0"
+           eternal="false"
+		   timeToIdleSeconds="0" 
+           timeToLiveSeconds="43200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="false"
+            >
+		<terracotta consistency="strong"   >
+			<nonstop enabled="true" timeoutMillis="2000" immediateTimeout="true" ><timeoutBehavior type="noop" /></nonstop>
+		</terracotta>
+	</cache>            
+
+<!--
+cache de requette 
+ -->
+
+<!-- TTL toujours plus elevé que les cache de requette -->
+    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+           maxElementsInMemory="0"
+           eternal="true"
+		   timeToIdleSeconds="0" 
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="false"
+            >
+		<terracotta consistency="strong"  >
+			<nonstop enabled="true" timeoutMillis="2000" immediateTimeout="true" ><timeoutBehavior type="noop" /></nonstop>
+		</terracotta>
+	</cache>            
+
+
+
+    <cache name="org.hibernate.cache.StandardQueryCache"
+           maxElementsInMemory="0"
+           eternal="false"
+		   timeToIdleSeconds="0" 
+           timeToLiveSeconds="43200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LFU"
+           statistics="false"
+            >
+		<terracotta consistency="strong"  >
+			<nonstop enabled="true" timeoutMillis="2000" immediateTimeout="true" ><timeoutBehavior type="noop" /></nonstop>
+		</terracotta>
+	</cache>            
+
+
+</ehcache>

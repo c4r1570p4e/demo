@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>demo</title>
+</h:head>
+<h:body>
+	<f:view>
+		<h:messages></h:messages>
+		<h:form id="form_createtag">
+			<h:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputLabel>Créer un tag</h:outputLabel>
+				</f:facet>
+				<h:outputLabel>Nom</h:outputLabel>
+				<h:inputText value="#{tagBean.nom}" id="nom" ></h:inputText>
+
+				<h:commandButton value="Creer" action="#{tagBean.creerTag}" id="creer" ></h:commandButton>
+
+				<h:commandButton value="Retour" action="index" immediate="true" id="retour" ></h:commandButton>
+			</h:panelGrid>
+		</h:form>
+
+	</f:view>
+
+</h:body>
+</html>

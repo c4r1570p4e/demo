@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<tc:tc-config xmlns:tc="http://www.terracotta.org/config"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.terracotta.org/schema/terracotta-6.xsd">
+
+  <tc-properties>
+
+    <property name="l2.nha.dirtydb.autoDelete" value="true"/>
+    <property name="l1.cachemanager.enabled" value="true"/>
+    <property name="logging.maxLogFileSize" value="1024"/>
+<!--	
+	<property name="l2.offHeapCache.map.percentage" value="40" />
+	<property name="l2.offHeapCache.operator.event.generator.sleepInterval" value="30000" />
+	<property name="l2.offHeapCache.operator.event.generator.threshold" value="70" />
+-->		
+
+<property name="l1.healthcheck.l2.ping.enabled" value="true" />
+<property name="l1.healthcheck.l2.ping.idletime" value="2000" />
+<property name="l1.healthcheck.l2.ping.interval" value="1000" />
+<property name="l1.healthcheck.l2.ping.probes" value="3" />
+<property name="l1.healthcheck.l2.socketConnect" value="true" />
+<property name="l1.healthcheck.l2.socketConnectTimeout" value="2" />
+<property name="l1.healthcheck.l2.socketConnectCount" value="5" />
+
+
+	<property name="productkey.path" value="C:\dev\terracotta\terracotta-ee-3.5.0\maconfig\terracotta-license.key" />	
+	
+  </tc-properties>
+  
+
+  <system>
+    <configuration-model>production</configuration-model>
+  </system>
+
+  <servers>
+
+    <server host="localhost" name="serverA"  >
+
+      <data>C:\dev\work\terracotta\serverA\data</data>
+      <logs>C:\dev\work\terracotta\serverA\logs</logs>
+      <statistics>C:\dev\work\terracotta\serverA\stats</statistics>
+
+      <dso-port bind="127.0.0.1" >9510</dso-port>
+      <jmx-port bind="127.0.0.1" >9520</jmx-port>
+      <l2-group-port bind="127.0.0.1" >9530</l2-group-port>
+      
+      <dso>
+
+        <client-reconnect-window>15</client-reconnect-window>
+
+        <persistence>
+          <mode>temporary-swap-only</mode>
+<!--		  
+		  <offheap>
+			<enabled>true</enabled>
+			<maxDataSize>500m</maxDataSize>      
+		  </offheap>		  
+-->		  
+        </persistence>
+
+        <garbage-collection>
+          <enabled>true</enabled>
+          <verbose>false</verbose>
+          <interval>3600</interval>
+        </garbage-collection>
+
+      </dso>
+    </server>
+	
+    <server host="localhost" name="serverB"  >
+
+      <data>C:\dev\work\terracotta\serverB\data</data>
+      <logs>C:\dev\work\terracotta\serverB\logs</logs>
+      <statistics>C:\dev\work\terracotta\serverB\stats</statistics>
+
+      <dso-port bind="127.0.0.1" >9550</dso-port>
+      <jmx-port bind="127.0.0.1" >9560</jmx-port>
+      <l2-group-port bind="127.0.0.1" >9570</l2-group-port>
+
+      <dso>
+
+        <client-reconnect-window>15</client-reconnect-window>
+
+        <persistence>
+          <mode>temporary-swap-only</mode>
+<!--		  
+		  <offheap>
+			<enabled>true</enabled>
+			<maxDataSize>500m</maxDataSize>      
+		  </offheap>			  
+-->		  
+        </persistence>
+
+        <garbage-collection>
+          <enabled>true</enabled>
+          <verbose>false</verbose>
+          <interval>3600</interval>
+        </garbage-collection>
+
+      </dso>
+    </server>
+	
+	
+    <mirror-groups>
+      <mirror-group group-name="group1">
+        <members>
+          <member>serverA</member>
+          <member>serverB</member>		  
+        </members>
+    </mirror-group>
+<!--
+	<mirror-groups> 
+      <mirror-group group-name="stripe1">
+        <members>
+          <member>serverA</member>
+        </members>
+       </mirror-group>
+      <mirror-group group-name="stripe2">
+        <members>
+          <member>serverB</member>		  
+        </members>
+       </mirror-group>
+-->	   
+    </mirror-groups>     
+
+    <ha>
+      <!-- 
+         disk-based active-passive or network-based active-passive mode. 
+         Default: 'networked-active-passive'
+      -->
+      <mode>networked-active-passive</mode>
+      
+      <networked-active-passive>
+        <election-time>5</election-time>
+      </networked-active-passive>
+    </ha>
+
+    <update-check>
+      <enabled>false</enabled>
+      <period-days>10</period-days>
+    </update-check>
+  </servers>
+
+  <clients>
+    <logs>logs-%i</logs>
+  </clients>
+
+</tc:tc-config>

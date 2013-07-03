@@ -1,0 +1,4 @@
+ajouter deans ce repertoire :
+
+terracotta-session-1.1.2.jar
+terracotta-toolkit-1.2-runtime-ee-3.0.0.jar

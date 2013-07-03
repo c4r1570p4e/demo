@@ -1,0 +1,1 @@
+installer mod_jk.so sur apache 2.2

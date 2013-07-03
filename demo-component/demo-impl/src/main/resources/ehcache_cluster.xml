@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true" name="cache_simple">
+
+    <diskStore path="java.io.tmpdir"/>
+    
+
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToLiveSeconds="43200"
+            overflowToDisk="false"
+            diskPersistent="false"
+            memoryStoreEvictionPolicy="LRU"
+            statistics="false"
+            />
+
+
+
+    <cache name="org.cl.demo.entity.Tag"
+           maxElementsInMemory="10000"
+           eternal="true"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU"
+            >
+		<cacheEventListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="org.cl.demo.entity.Utilisateur"
+           maxElementsInMemory="10000"
+           eternal="true"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU"
+            >
+		<cacheEventListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="org.cl.demo.entity.Favoris"
+           maxElementsInMemory="10000"
+           eternal="false"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU"
+            >
+		<cacheEventListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <cache name="org.cl.demo.entity.Favoris.tags"
+           maxElementsInMemory="10000"
+           eternal="false"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU"
+            >
+		<cacheEventListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+<!--
+cache de requette 
+ -->
+
+<!-- TTL toujours plus elevé que les cache de requette -->
+    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+           maxElementsInMemory="10000"
+           eternal="true"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU"
+            >
+		<cacheEventListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+
+    <cache name="org.hibernate.cache.StandardQueryCache"
+           maxElementsInMemory="10000"
+           eternal="false"
+           overflowToDisk="false"
+            timeToLiveSeconds="43200"           
+           memoryStoreEvictionPolicy="LFU"
+            >
+		<cacheEventListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+            
+            
+	<!--
+	multicastGroupAddress = 224.0.0.0 through 239.255.255.255
+	
+	TTL     Scope
+   	0    Restricted to the same host. Won't be output by any interface.
+   	1    Restricted to the same subnet. Won't be forwarded by a router.
+ 	<32         Restricted to the same site, organization or department.
+ 	<64 Restricted to the same region.
+	<128 Restricted to the same continent.
+	<255 Unrestricted in scope. Global.
+  
+	 -->
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic, multicastGroupAddress=230.0.0.1,
+ 		multicastGroupPort=4446, timeToLive=0" />
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="socketTimeoutMillis=6000"
+	 />
+ 		            
+
+</ehcache>
