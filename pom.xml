@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>demo</groupId>
 	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.10.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>demo-parent</name>
 	<build>
@@ -118,4 +118,9 @@
 	
 	
 	
+	<scm>
+		<url>scm:git:https://github.com/c4r1570p4e/demo.git</url>
+		<connection>scm:git:https://github.com/c4r1570p4e/demo.git</connection>
+		<developerConnection>scm:git:https://github.com/c4r1570p4e/demo.git</developerConnection>
+	</scm>
 </project>
