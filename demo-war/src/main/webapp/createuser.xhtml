@@ -1,35 +1,52 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>demo</title>
 </h:head>
+
 <h:body>
-	<f:view>
-		<h:messages></h:messages>
-		<h:form id="form_createuser" >
 
-			<h:panelGrid columns="2">
-				<f:facet name="header">
-					<h:outputLabel>Créer un utilisateur</h:outputLabel>
-				</f:facet>
+	<ui:composition template="/template/commonLayout.xhtml">
 
-				<h:outputLabel>User</h:outputLabel>
-				<h:inputText value="#{nouveauUtilisateurBean.utilisateur.login}" id="login" ></h:inputText>
+		<ui:define name="content">
+			<f:view>
+				<h:messages></h:messages>
+				<h:form id="form_createuser">
 
-				<h:outputLabel>Password</h:outputLabel>
-				<h:inputSecret value="#{nouveauUtilisateurBean.utilisateur.motDePasse}" id="motdepasse" ></h:inputSecret>
+					<h:panelGrid columns="2">
+						<f:facet name="header">
+							<h:outputLabel>Créer un utilisateur</h:outputLabel>
+						</f:facet>
 
-				<h:outputLabel>Password (confirmation)</h:outputLabel>
-				<h:inputSecret value="#{nouveauUtilisateurBean.passwordConfirmation}" id="pwdconf" ></h:inputSecret>
+						<h:outputLabel>User</h:outputLabel>
+						<h:inputText value="#{nouveauUtilisateurBean.utilisateur.login}"
+							id="login"></h:inputText>
 
-				<h:commandButton value="Creer" action="#{nouveauUtilisateurBean.creer}" id="btncreer"></h:commandButton>
+						<h:outputLabel>Password</h:outputLabel>
+						<h:inputSecret
+							value="#{nouveauUtilisateurBean.utilisateur.motDePasse}"
+							id="motdepasse"></h:inputSecret>
 
-				<h:commandButton value="retour" action="login" immediate="true" id="btnretour" ></h:commandButton>
-			</h:panelGrid>
-		</h:form>
-	</f:view>
+						<h:outputLabel>Password (confirmation)</h:outputLabel>
+						<h:inputSecret
+							value="#{nouveauUtilisateurBean.passwordConfirmation}"
+							id="pwdconf"></h:inputSecret>
+
+						<h:commandButton value="Creer"
+							action="#{nouveauUtilisateurBean.creer}" id="btncreer"></h:commandButton>
+
+						<h:commandButton value="retour" action="login" immediate="true"
+							id="btnretour"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</f:view>
+		</ui:define>
+
+	</ui:composition>
 
 </h:body>
 </html>

@@ -1,35 +1,48 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>demo</title>
 </h:head>
+
 <h:body>
-	<f:view>
-		<h:messages></h:messages>
-		<h:form id="form_login">
-			<h:panelGrid columns="2">
 
-				<f:facet name="header">
-					<h:outputLabel>Identification</h:outputLabel>
-				</f:facet>
+	<ui:composition template="/template/commonLayout.xhtml">
 
-				<h:outputLabel>User</h:outputLabel>
-				<h:inputText value="#{utilisateurBean.user}" id="user"></h:inputText>
+		<ui:define name="content">
+			<f:view>
+				<h:messages></h:messages>
+				<h:form id="form_login">
+					<h:panelGrid columns="2">
 
-				<h:outputLabel>Password</h:outputLabel>
-				<h:inputSecret value="#{utilisateurBean.password}" id="pwd"></h:inputSecret>
+						<f:facet name="header">
+							<h:outputLabel>Identification</h:outputLabel>
+						</f:facet>
 
-				<h:commandButton value="Valider" action="#{utilisateurBean.authentifier}"></h:commandButton>
-				<h:panelGroup>
-					<h:commandButton value="Créer utilisateur" action="createuser" immediate="true" id="btncreateuser"></h:commandButton>
-					<h:commandButton value="retour" action="index" immediate="true" id="btnretour"></h:commandButton>
-				</h:panelGroup>
-			</h:panelGrid>
+						<h:outputLabel>User</h:outputLabel>
+						<h:inputText value="#{utilisateurBean.user}" id="user"></h:inputText>
 
-		</h:form>
-	</f:view>
+						<h:outputLabel>Password</h:outputLabel>
+						<h:inputSecret value="#{utilisateurBean.password}" id="pwd"></h:inputSecret>
+
+						<h:commandButton value="Valider"
+							action="#{utilisateurBean.authentifier}"></h:commandButton>
+						<h:panelGroup>
+							<h:commandButton value="Créer utilisateur" action="createuser"
+								immediate="true" id="btncreateuser"></h:commandButton>
+							<h:commandButton value="retour" action="index" immediate="true"
+								id="btnretour"></h:commandButton>
+						</h:panelGroup>
+					</h:panelGrid>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+
+	</ui:composition>
 
 </h:body>
 </html>

@@ -1,46 +1,61 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>demo</title>
 </h:head>
+
 <h:body>
-	<f:view>
-		<h:messages></h:messages>
-		<h:form id="form_mdffav">
 
-			<h:panelGrid columns="2">
+	<ui:composition template="/template/commonLayout.xhtml">
 
-				<f:facet name="header">
-					<h:outputLabel>Modifier un favoris</h:outputLabel>
-				</f:facet>
+		<ui:define name="content">
+			<f:view>
+				<h:messages></h:messages>
+				<h:form id="form_mdffav">
 
-				<h:outputLabel>Nom</h:outputLabel>
-				<h:inputText value="#{modifierFavorisBean.favoris.nom}" disabled="true" id="nom"></h:inputText>
+					<h:panelGrid columns="2">
 
-				<h:outputLabel>URL</h:outputLabel>
-				<h:inputText value="#{modifierFavorisBean.url}" id="url"></h:inputText>
+						<f:facet name="header">
+							<h:outputLabel>Modifier un favoris</h:outputLabel>
+						</f:facet>
 
-				<h:outputLabel>Type</h:outputLabel>
-				<h:selectOneMenu value="#{modifierFavorisBean.favorisType}" id="type">
-					<f:selectItems value="#{listeTypesBean.types}"></f:selectItems>
-				</h:selectOneMenu>
+						<h:outputLabel>Nom</h:outputLabel>
+						<h:inputText value="#{modifierFavorisBean.favoris.nom}"
+							disabled="true" id="nom"></h:inputText>
 
-				<h:outputLabel>tags</h:outputLabel>
-				<h:selectManyCheckbox value="#{modifierFavorisBean.favorisTags}" converter="cl.demo.view.tagconverter"
-					layout="pageDirection" id="tags">
-					<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
-				</h:selectManyCheckbox>
+						<h:outputLabel>URL</h:outputLabel>
+						<h:inputText value="#{modifierFavorisBean.url}" id="url"></h:inputText>
 
-				<h:commandButton value="Valider" action="#{modifierFavorisBean.modifierFavoris}" id="btnvalider"></h:commandButton>
-				<h:commandButton value="Annuler" action="index" immediate="true" id="btnannuler"></h:commandButton>
+						<h:outputLabel>Type</h:outputLabel>
+						<h:selectOneMenu value="#{modifierFavorisBean.favorisType}"
+							id="type">
+							<f:selectItems value="#{listeTypesBean.types}"></f:selectItems>
+						</h:selectOneMenu>
 
-			</h:panelGrid>
+						<h:outputLabel>tags</h:outputLabel>
+						<h:selectManyCheckbox value="#{modifierFavorisBean.favorisTags}"
+							converter="cl.demo.view.tagconverter" layout="pageDirection"
+							id="tags">
+							<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
+						</h:selectManyCheckbox>
+
+						<h:commandButton value="Valider"
+							action="#{modifierFavorisBean.modifierFavoris}" id="btnvalider"></h:commandButton>
+						<h:commandButton value="Annuler" action="index" immediate="true"
+							id="btnannuler"></h:commandButton>
+
+					</h:panelGrid>
 
 
-		</h:form>
-	</f:view>
+				</h:form>
+			</f:view>
+		</ui:define>
+
+	</ui:composition>
 
 </h:body>
 </html>
