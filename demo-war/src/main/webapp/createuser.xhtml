@@ -14,34 +14,50 @@
 
 		<ui:define name="content">
 			<f:view>
-				<h:messages></h:messages>
-				<h:form id="form_createuser">
 
-					<h:panelGrid columns="2">
-						<f:facet name="header">
-							<h:outputLabel>Créer un utilisateur</h:outputLabel>
-						</f:facet>
+				<div class="text-center">
+					<h2>Créer un utilisateur</h2>
+				</div>
 
-						<h:outputLabel>User</h:outputLabel>
-						<h:inputText value="#{nouveauUtilisateurBean.utilisateur.login}"
-							id="login"></h:inputText>
+				<h:messages styleClass="text-error"></h:messages>
 
-						<h:outputLabel>Password</h:outputLabel>
-						<h:inputSecret
-							value="#{nouveauUtilisateurBean.utilisateur.motDePasse}"
-							id="motdepasse"></h:inputSecret>
+				<h:form id="form_createuser" styleClass="form-horizontal">
 
-						<h:outputLabel>Password (confirmation)</h:outputLabel>
-						<h:inputSecret
-							value="#{nouveauUtilisateurBean.passwordConfirmation}"
-							id="pwdconf"></h:inputSecret>
+					<div class="control-group">
+						<div class="control-label">User</div>
+						<div class="controls">
+							<h:inputText value="#{nouveauUtilisateurBean.utilisateur.login}"
+								id="login"></h:inputText>
+						</div>
+					</div>
 
-						<h:commandButton value="Creer"
-							action="#{nouveauUtilisateurBean.creer}" id="btncreer"></h:commandButton>
+					<div class="control-group">
+						<div class="control-label">Password</div>
+						<div class="controls">
+							<h:inputSecret
+								value="#{nouveauUtilisateurBean.utilisateur.motDePasse}"
+								id="motdepasse"></h:inputSecret>
+						</div>
+					</div>
 
-						<h:commandButton value="retour" action="login" immediate="true"
-							id="btnretour"></h:commandButton>
-					</h:panelGrid>
+					<div class="control-group">
+						<div class="control-label">Password (confirmation)</div>
+						<div class="controls">
+							<h:inputSecret
+								value="#{nouveauUtilisateurBean.passwordConfirmation}"
+								id="pwdconf"></h:inputSecret>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<h:commandButton value="Creer"
+								action="#{nouveauUtilisateurBean.creer}" id="btncreer"
+								styleClass="btn btn-primary"></h:commandButton>
+							<h:commandButton value="retour" action="login" immediate="true"
+								id="btnretour" styleClass="btn"></h:commandButton>
+						</div>
+					</div>
 				</h:form>
 			</f:view>
 		</ui:define>

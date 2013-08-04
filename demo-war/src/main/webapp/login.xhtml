@@ -14,29 +14,39 @@
 
 		<ui:define name="content">
 			<f:view>
-				<h:messages></h:messages>
-				<h:form id="form_login">
-					<h:panelGrid columns="2">
+				<div class="text-center">
+					<h2>
+						Identification
+					</h2>
+				</div>
+				<h:messages styleClass="text-error" ></h:messages>
+				<h:form id="form_login" styleClass="form-horizontal">
 
-						<f:facet name="header">
-							<h:outputLabel>Identification</h:outputLabel>
-						</f:facet>
+					<div class="control-group">
+						<div class="control-label">User</div>
+						<div class="controls">
+							<h:inputText value="#{utilisateurBean.user}" id="user"></h:inputText>
+						</div>
+					</div>
 
-						<h:outputLabel>User</h:outputLabel>
-						<h:inputText value="#{utilisateurBean.user}" id="user"></h:inputText>
+					<div class="control-group">
+						<div class="control-label">Password</div>
+						<div class="controls">
+							<h:inputSecret value="#{utilisateurBean.password}" id="pwd"></h:inputSecret>
+						</div>
+					</div>
 
-						<h:outputLabel>Password</h:outputLabel>
-						<h:inputSecret value="#{utilisateurBean.password}" id="pwd"></h:inputSecret>
-
-						<h:commandButton value="Valider"
-							action="#{utilisateurBean.authentifier}"></h:commandButton>
-						<h:panelGroup>
+					<div class="control-group">
+						<div class="controls">
+							<h:commandButton value="Valider"
+								action="#{utilisateurBean.authentifier}"
+								styleClass="btn btn-primary"></h:commandButton>
 							<h:commandButton value="Créer utilisateur" action="createuser"
-								immediate="true" id="btncreateuser"></h:commandButton>
+								immediate="true" id="btncreateuser" styleClass="btn btn-info"></h:commandButton>
 							<h:commandButton value="retour" action="index" immediate="true"
-								id="btnretour"></h:commandButton>
-						</h:panelGroup>
-					</h:panelGrid>
+								id="btnretour" styleClass="btn"></h:commandButton>
+						</div>
+					</div>
 
 				</h:form>
 			</f:view>

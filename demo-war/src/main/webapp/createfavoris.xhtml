@@ -14,45 +14,59 @@
 
 		<ui:define name="content">
 			<f:view>
-				<h:messages></h:messages>
+
+				<div class="text-center">
+					<h2>Créer un favoris</h2>
+				</div>
+
+				<h:messages styleClass="text-error"></h:messages>
+
+				<h:form id="from_createfav" styleClass="form-horizontal">
 
 
+					<div class="control-group">
+						<div class="control-label">Nom</div>
+						<div class="controls">
+							<h:inputText value="#{nouveauFavorisBean.favoris.nom}" id="nom"></h:inputText>
+						</div>
+					</div>
 
-				<h:form id="from_createfav">
+					<div class="control-group">
+						<div class="control-label">URL</div>
+						<div class="controls">
+							<h:inputText value="#{nouveauFavorisBean.favoris.url}" id="url"></h:inputText>
+						</div>
+					</div>
 
+					<div class="control-group">
+						<div class="control-label">Type</div>
+						<div class="controls">
+							<h:selectOneMenu value="#{nouveauFavorisBean.favoris.type}"
+								id="type">
+								<f:selectItems value="#{listeTypesBean.types}"></f:selectItems>
+							</h:selectOneMenu>
+						</div>
+					</div>
 
-					<h:panelGrid columns="2" border="0">
-						<f:facet name="header">
-							<h:outputLabel>Créer un favoris</h:outputLabel>
-						</f:facet>
+					<div class="control-group">
+						<div class="control-label">Tags</div>
+						<div class="controls">
+							<h:selectManyListbox value="#{nouveauFavorisBean.favoris.tags}"
+								converter="cl.demo.view.tagconverter" size="5" id="tags">
+								<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
+							</h:selectManyListbox>
+						</div>
+					</div>
 
-
-						<h:outputLabel>Nom</h:outputLabel>
-						<h:inputText value="#{nouveauFavorisBean.favoris.nom}" id="nom"></h:inputText>
-
-						<h:outputLabel>URL</h:outputLabel>
-						<h:inputText value="#{nouveauFavorisBean.favoris.url}" id="url"></h:inputText>
-
-						<h:outputLabel>Type</h:outputLabel>
-						<h:selectOneMenu value="#{nouveauFavorisBean.favoris.type}"
-							id="type">
-							<f:selectItems value="#{listeTypesBean.types}"></f:selectItems>
-						</h:selectOneMenu>
-
-						<h:outputLabel>tags</h:outputLabel>
-						<h:selectManyCheckbox value="#{nouveauFavorisBean.favoris.tags}"
-							converter="cl.demo.view.tagconverter" layout="pageDirection"
-							id="tags">
-							<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
-						</h:selectManyCheckbox>
-
-						<h:commandButton value="Creer"
-							action="#{nouveauFavorisBean.creerFavoris}" id="btncreer"></h:commandButton>
-						<h:commandButton value="Retour" action="index" immediate="true"
-							id="btnretour"></h:commandButton>
-					</h:panelGrid>
-
-
+					<div class="control-group">
+						<div class="controls">
+							<h:commandButton value="Creer"
+								action="#{nouveauFavorisBean.creerFavoris}" id="btncreer"
+								styleClass="btn btn-primary"></h:commandButton>
+							<h:commandButton value="Retour" action="index" immediate="true"
+								id="btnretour" styleClass="btn"></h:commandButton>
+						</div>
+					</div>
 
 				</h:form>
 			</f:view>

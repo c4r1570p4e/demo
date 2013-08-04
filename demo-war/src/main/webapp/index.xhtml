@@ -15,111 +15,128 @@
 		<ui:define name="content">
 			<f:view>
 
-				<h:outputLabel>Utilisateur : </h:outputLabel>
-				<h:outputText value="#{listeFavorisBean.utilisateur.login}"
-					rendered="#{listeFavorisBean.utilisateur!=null}"></h:outputText>
-				<h:outputLabel rendered="#{listeFavorisBean.utilisateur==null}">Anonyme</h:outputLabel>
+				<br/>
 
-				<h:form id="index_form">
+				<h:panelGrid columns="2">
+					<h:outputText value="Bonjour "
+						rendered="#{listeFavorisBean.utilisateur!=null}"></h:outputText>
+					<h:outputText value="#{listeFavorisBean.utilisateur.login}"
+						rendered="#{listeFavorisBean.utilisateur!=null}" />
+					<h:outputText value="Vous n'êtes pas connecté"
+						rendered="#{listeFavorisBean.utilisateur==null}" />
+				</h:panelGrid>
 
-					<h:messages></h:messages>
+				<br/>
 
-					<h:panelGrid columns="1" border="1">
+				<h:messages></h:messages>
 
-						<h:panelGrid columns="5">
+				<h:form id="index_form" styleClass="form-inline">
+
+					<div class="input-prepend">
+						<span class="add-on">Nom : </span>
+						<h:inputText value="#{listeFavorisBean.nomRecherche}" id="filtre"
+							styleClass="span2"></h:inputText>
+					</div>
+
+					<div class="input-prepend input-append">
+						<span class="add-on">Tag : </span>
+						<h:selectOneMenu value="#{listeFavorisBean.tagRecherche}"
+							converter="cl.demo.view.tagconverter" id="dbfiltre"
+							styleClass="span2">
+							<f:selectItem itemLabel="" noSelectionOption="true"></f:selectItem>
+							<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
+						</h:selectOneMenu>
+						<h:commandButton value="Filtrer"
+							action="#{listeFavorisBean.filtrer}" id="btnfiltrer"
+							styleClass="btn">
+						</h:commandButton>
+					</div>
+					
+				</h:form>
+
+				<h:form id="index_form2">
+
+					<h:outputLabel rendered="#{listeFavorisBean.favoris.size() == 0}" value="Aucun résultat"></h:outputLabel>
+
+					<h:dataTable value="#{listeFavorisBean.favoris}" var="ligne"
+						id="table"
+						styleClass="table table-striped table-condensed table-hover" rendered="#{listeFavorisBean.favoris.size() != 0}" >
+						<h:column>
 							<f:facet name="header">
-								<h:outputLabel>Filtre</h:outputLabel>
+								<h:outputText value="Nom"></h:outputText>
 							</f:facet>
-							<h:outputLabel>Nom : </h:outputLabel>
-							<h:inputText value="#{listeFavorisBean.nomRecherche}" id="filtre"></h:inputText>
-							<h:outputLabel>Tag : </h:outputLabel>
-							<h:selectOneMenu value="#{listeFavorisBean.tagRecherche}"
-								converter="cl.demo.view.tagconverter" id="dbfiltre">
-								<f:selectItem itemLabel="" noSelectionOption="true"></f:selectItem>
-								<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
-							</h:selectOneMenu>
-							<h:commandButton value="Filtrer"
-								action="#{listeFavorisBean.filtrer}" id="btnfiltrer">
+							<h:outputText value="#{ligne.favoris.nom}"></h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Url"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{ligne.favoris.url}"></h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Type"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{ligne.favoris.type}"></h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Tags"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{ligne.favoris.tags}"
+								converter="cl.demo.view.affichageConverter"></h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Proprietaire"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{ligne.favoris.proprietaire.login}"></h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Modifier"></h:outputText>
+							</f:facet>
+							<h:commandButton value="Modifier" action="#{ligne.modifier}"
+								rendered="#{ligne.proprietaire}" id="btnmodifier"
+								styleClass="btn btn-mini btn-primary">
 							</h:commandButton>
-						</h:panelGrid>
-
-
-
-						<h:dataTable value="#{listeFavorisBean.favoris}" var="ligne"
-							border="1" id="table">
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Nom"></h:outputText>
-								</f:facet>
-								<h:outputText value="#{ligne.favoris.nom}"></h:outputText>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Url"></h:outputText>
-								</f:facet>
-								<h:outputText value="#{ligne.favoris.url}"></h:outputText>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Type"></h:outputText>
-								</f:facet>
-								<h:outputText value="#{ligne.favoris.type}"></h:outputText>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Tags"></h:outputText>
-								</f:facet>
-								<h:outputText value="#{ligne.favoris.tags}"
-									converter="cl.demo.view.affichageConverter"></h:outputText>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Proprietaire"></h:outputText>
-								</f:facet>
-								<h:outputText value="#{ligne.favoris.proprietaire.login}"></h:outputText>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Modifier"></h:outputText>
-								</f:facet>
-								<h:commandButton value="Modifier" action="#{ligne.modifier}"
-									rendered="#{ligne.proprietaire}" id="btnmodifier">
-								</h:commandButton>
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<h:outputText value="Supprimer"></h:outputText>
-								</f:facet>
-								<h:commandButton value="Supprimer" action="#{ligne.supprimer}"
-									rendered="#{ligne.proprietaire}" id="btnsupprimer">
-								</h:commandButton>
-							</h:column>
-						</h:dataTable>
-
-						<h:panelGrid columns="4">
-							<h:commandButton value="Connecter" action="login"
-								rendered="#{listeFavorisBean.afficherConnecter}"
-								id="btnconnecter">
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Supprimer"></h:outputText>
+							</f:facet>
+							<h:commandButton value="Supprimer" action="#{ligne.supprimer}"
+								rendered="#{ligne.proprietaire}" id="btnsupprimer"
+								styleClass="btn btn-mini btn-danger">
 							</h:commandButton>
-							<h:commandButton value="Déconnecter"
-								action="#{listeFavorisBean.deconnecter}"
-								rendered="#{listeFavorisBean.afficherDeConnecter}"
-								id="btndeconnecter">
-							</h:commandButton>
-							<h:commandButton value="ajouter favoris" action="createfavoris"
-								rendered="#{listeFavorisBean.afficherAjouter}"
-								id="btnajouterfav">
-							</h:commandButton>
-							<h:commandButton value="ajouter tag" action="createtag"
-								rendered="#{listeFavorisBean.afficherAjouter}"
-								id="btnajoutertag">
-							</h:commandButton>
-
-						</h:panelGrid>
-
-					</h:panelGrid>
+						</h:column>
+					</h:dataTable>
 
 				</h:form>
+
+				<h:form id="index_form3" styleClass="form-inline">
+
+					<h:commandButton value="Connecter" action="login"
+						rendered="#{listeFavorisBean.afficherConnecter}" id="btnconnecter"
+						styleClass="btn btn-primary">
+					</h:commandButton>
+					<h:commandButton value="ajouter favoris" action="createfavoris"
+						rendered="#{listeFavorisBean.afficherAjouter}" id="btnajouterfav"
+						styleClass="btn btn-primary">
+					</h:commandButton>
+					<h:commandButton value="ajouter tag" action="createtag"
+						rendered="#{listeFavorisBean.afficherAjouter}" id="btnajoutertag"
+						styleClass="btn btn-info">
+					</h:commandButton>
+					<h:commandButton value="Déconnecter"
+						action="#{listeFavorisBean.deconnecter}"
+						rendered="#{listeFavorisBean.afficherDeConnecter}"
+						id="btndeconnecter" styleClass="btn btn-inverse">
+					</h:commandButton>
+				</h:form>
+
+
+
 			</f:view>
 		</ui:define>
 

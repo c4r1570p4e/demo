@@ -14,21 +14,31 @@
 
 		<ui:define name="content">
 			<f:view>
-				<h:messages></h:messages>
-				<h:form id="form_createtag">
-					<h:panelGrid columns="2">
-						<f:facet name="header">
-							<h:outputLabel>Créer un tag</h:outputLabel>
-						</f:facet>
-						<h:outputLabel>Nom</h:outputLabel>
-						<h:inputText value="#{tagBean.nom}" id="nom"></h:inputText>
 
-						<h:commandButton value="Creer" action="#{tagBean.creerTag}"
-							id="creer"></h:commandButton>
+				<div class="text-center">
+					<h2>Créer un tag</h2>
+				</div>
 
-						<h:commandButton value="Retour" action="index" immediate="true"
-							id="retour"></h:commandButton>
-					</h:panelGrid>
+				<h:messages styleClass="text-error"></h:messages>
+
+				<h:form id="form_createtag" styleClass="form-horizontal">
+
+					<div class="control-group">
+						<div class="control-label">Nom</div>
+						<div class="controls">
+							<h:inputText value="#{tagBean.nom}" id="nom"></h:inputText>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<h:commandButton value="Creer" action="#{tagBean.creerTag}"
+								id="creer" styleClass="btn btn-primary"></h:commandButton>
+							<h:commandButton value="Retour" action="index" immediate="true"
+								id="retour" styleClass="btn"></h:commandButton>
+						</div>
+					</div>
+
 				</h:form>
 
 			</f:view>

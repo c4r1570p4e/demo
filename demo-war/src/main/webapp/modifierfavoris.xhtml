@@ -14,42 +14,60 @@
 
 		<ui:define name="content">
 			<f:view>
-				<h:messages></h:messages>
-				<h:form id="form_mdffav">
 
-					<h:panelGrid columns="2">
+				<div class="text-center">
+					<h2>Modifier un favoris</h2>
+				</div>
 
-						<f:facet name="header">
-							<h:outputLabel>Modifier un favoris</h:outputLabel>
-						</f:facet>
+				<h:messages styleClass="text-error"></h:messages>
 
-						<h:outputLabel>Nom</h:outputLabel>
-						<h:inputText value="#{modifierFavorisBean.favoris.nom}"
-							disabled="true" id="nom"></h:inputText>
+				<h:form id="form_mdffav" styleClass="form-horizontal">
 
-						<h:outputLabel>URL</h:outputLabel>
-						<h:inputText value="#{modifierFavorisBean.url}" id="url"></h:inputText>
+					<div class="control-group">
+						<div class="control-label">Nom</div>
+						<div class="controls">
+							<h:inputText value="#{modifierFavorisBean.favoris.nom}"
+								disabled="true" id="nom"></h:inputText>
+						</div>
+					</div>
 
-						<h:outputLabel>Type</h:outputLabel>
-						<h:selectOneMenu value="#{modifierFavorisBean.favorisType}"
-							id="type">
-							<f:selectItems value="#{listeTypesBean.types}"></f:selectItems>
-						</h:selectOneMenu>
+					<div class="control-group">
+						<div class="control-label">URL</div>
+						<div class="controls">
+							<h:inputText value="#{modifierFavorisBean.url}" id="url"></h:inputText>
+						</div>
+					</div>
 
-						<h:outputLabel>tags</h:outputLabel>
-						<h:selectManyCheckbox value="#{modifierFavorisBean.favorisTags}"
-							converter="cl.demo.view.tagconverter" layout="pageDirection"
-							id="tags">
-							<f:selectItems value="#{listeTagBean.tags}"></f:selectItems>
-						</h:selectManyCheckbox>
+					<div class="control-group">
+						<div class="control-label">Type</div>
+						<div class="controls">
+							<h:selectOneMenu value="#{modifierFavorisBean.favorisType}"
+								id="type">
+								<f:selectItems value="#{listeTypesBean.types}"></f:selectItems>
+							</h:selectOneMenu>
+						</div>
+					</div>
 
-						<h:commandButton value="Valider"
-							action="#{modifierFavorisBean.modifierFavoris}" id="btnvalider"></h:commandButton>
-						<h:commandButton value="Annuler" action="index" immediate="true"
-							id="btnannuler"></h:commandButton>
+					<div class="control-group">
+						<div class="control-label">Tags</div>
+						<div class="controls">
+							<h:selectManyListbox value="#{modifierFavorisBean.favorisTags}"
+								converter="cl.demo.view.tagconverter" size="5" id="tags" >
+								
+								<f:selectItems value="#{listeTagBean.tags}" ></f:selectItems>
+							</h:selectManyListbox>
+						</div>
+					</div>
 
-					</h:panelGrid>
-
+					<div class="control-group">
+						<div class="controls">
+							<h:commandButton value="Valider"
+								action="#{modifierFavorisBean.modifierFavoris}" id="btnvalider"
+								styleClass="btn btn-primary"></h:commandButton>
+							<h:commandButton value="Annuler" action="index" immediate="true"
+								id="btnannuler" styleClass="btn"></h:commandButton>
+						</div>
+					</div>
 
 				</h:form>
 			</f:view>
