@@ -1,6 +1,7 @@
 package org.cl.demo.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -36,6 +37,9 @@ public class Utilisateur implements Serializable {
 	@NotNull(message = "Mot de passe obligatoire")
 	private String motDePasse;
 
+	@NotNull(message = "Date de naissance obligatoire")
+	private Date dateNaissance;
+
 	public Utilisateur() {
 		super();
 	}
@@ -65,6 +69,14 @@ public class Utilisateur implements Serializable {
 		this.motDePasse = motDePasse;
 	}
 
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,8 +91,8 @@ public class Utilisateur implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
+		// if (getClass() != obj.getClass())
+		// return false;
 		Utilisateur other;
 		try {
 			other = (Utilisateur) obj;
