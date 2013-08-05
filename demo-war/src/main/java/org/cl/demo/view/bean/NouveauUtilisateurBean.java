@@ -35,14 +35,6 @@ public class NouveauUtilisateurBean implements Serializable {
 	@Autowired
 	private UtilisateurService utilisateurService;
 
-//	public UtilisateurService getUtilisateurService() {
-//		return utilisateurService;
-//	}
-//
-//	public void setUtilisateurService(UtilisateurService utilisateurService) {
-//		this.utilisateurService = utilisateurService;
-//	}
-
 	public String creer() {
 
 		if (!utilisateur.getMotDePasse().equals(passwordConfirmation)) {

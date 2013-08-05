@@ -52,14 +52,6 @@ public class UtilisateurBean implements Serializable {
 		this.password = password;
 	}
 
-//	public UtilisateurService getUtilisateurService() {
-//		return utilisateurService;
-//	}
-//
-//	public void setUtilisateurService(UtilisateurService utilisateurService) {
-//		this.utilisateurService = utilisateurService;
-//	}
-
 	public String authentifier() {
 
 		try {

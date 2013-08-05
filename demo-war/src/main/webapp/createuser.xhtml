@@ -48,6 +48,17 @@
 								id="pwdconf"></h:inputSecret>
 						</div>
 					</div>
+					
+					<div class="control-group">
+						<div class="control-label">Date de naissance</div>
+						<div class="controls">
+							<h:inputText id="date"
+								value="#{nouveauUtilisateurBean.utilisateur.dateNaissance}"
+								maxlength="10" converterMessage="Le format de date attendu est jj/mm/aaaa" >
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:inputText>
+						</div>
+					</div>
 
 					<div class="control-group">
 						<div class="controls">

@@ -3,6 +3,7 @@ package org.cl.demo.service.impl;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -47,6 +48,7 @@ public class FavorisServiceTest {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setLogin("user1");
 		utilisateur.setMotDePasse("mdp1");
+		utilisateur.setDateNaissance(new Date());
 
 		utilisateurService.creerUtilisateur(utilisateur);
 
@@ -59,6 +61,7 @@ public class FavorisServiceTest {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setLogin("user2");
 		utilisateur.setMotDePasse("mdp2");
+		utilisateur.setDateNaissance(new Date());
 
 		utilisateurService.creerUtilisateur(utilisateur);
 

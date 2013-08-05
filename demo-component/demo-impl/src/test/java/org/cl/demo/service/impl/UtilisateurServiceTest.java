@@ -1,5 +1,7 @@
 package org.cl.demo.service.impl;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertEquals;
 
@@ -40,11 +43,13 @@ public class UtilisateurServiceTest {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setLogin("user1");
 		utilisateur.setMotDePasse("passe");
+		utilisateur.setDateNaissance(new Date());
 		utilisateurService.creerUtilisateur(utilisateur);
 
 		Utilisateur utilisateur2 = new Utilisateur();
 		utilisateur2.setLogin("user1");
 		utilisateur2.setMotDePasse("passe");
+		utilisateur2.setDateNaissance(new Date());
 		utilisateurService.creerUtilisateur(utilisateur2);
 	}
 
@@ -67,11 +72,13 @@ public class UtilisateurServiceTest {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setLogin("user1");
 		utilisateur.setMotDePasse("mdp1");
+		utilisateur.setDateNaissance(new Date());
 		utilisateurService.creerUtilisateur(utilisateur);
 
 		utilisateur = new Utilisateur();
 		utilisateur.setLogin("user2");
 		utilisateur.setMotDePasse("mdp2");
+		utilisateur.setDateNaissance(new Date());		
 		utilisateurService.creerUtilisateur(utilisateur);
 
 		em.flush();

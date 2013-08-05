@@ -1,5 +1,6 @@
 package org.cl.demo.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotSame;
 
@@ -47,16 +49,19 @@ public class FavorisDaoTest {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setLogin("user1");
 		utilisateur.setMotDePasse("mdp1");
+		utilisateur.setDateNaissance(new Date());
 		utilisateurDao.createUtilisateur(utilisateur);
 
 		utilisateur = new Utilisateur();
 		utilisateur.setLogin("user2");
 		utilisateur.setMotDePasse("mdp2");
+		utilisateur.setDateNaissance(new Date());
 		utilisateurDao.createUtilisateur(utilisateur);
 
 		utilisateur = new Utilisateur();
 		utilisateur.setLogin("user3");
 		utilisateur.setMotDePasse("mdp3");
+		utilisateur.setDateNaissance(new Date());
 		utilisateurDao.createUtilisateur(utilisateur);
 
 		em.flush();
