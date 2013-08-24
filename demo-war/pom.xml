@@ -3,15 +3,16 @@
   <parent>
     <artifactId>demo</artifactId>
     <groupId>demo</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.10.0-SNAPSHOT</version>
   </parent>
   <artifactId>demo-war</artifactId>
+  <version>0.10.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <dependencies>
   	<dependency>
   		<groupId>demo</groupId>
   		<artifactId>demo-impl</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
+  		<version>0.10.0-SNAPSHOT</version>
   		<type>jar</type>
   		<scope>compile</scope>
   	</dependency>
@@ -39,7 +40,7 @@
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-web</artifactId>
-  		<version>3.0.5.RELEASE</version>
+  		<version>${spring.version}</version>
   		<type>jar</type>
   		<scope>compile</scope>
   	</dependency>

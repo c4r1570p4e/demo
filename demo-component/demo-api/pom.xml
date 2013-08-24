@@ -3,7 +3,8 @@
   <parent>
   	<artifactId>demo-component</artifactId>
   	<groupId>demo</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.10.0-SNAPSHOT</version>
   </parent>
   <artifactId>demo-api</artifactId>
+  <version>0.10.0-SNAPSHOT</version>
 </project>
