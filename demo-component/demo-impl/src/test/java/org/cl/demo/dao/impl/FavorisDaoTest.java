@@ -95,7 +95,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = ConstraintViolationException.class)
 	@Transactional
-	public void createVoidfavoris1() {
+	public void createVoidfavoris1() throws Exception {
 		createUsers();
 
 		Utilisateur utilisateur = utilisateurDao.findUserByLogin("user1");
@@ -114,7 +114,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = ConstraintViolationException.class)
 	@Transactional
-	public void createVoidfavoris2() {
+	public void createVoidfavoris2() throws Exception {
 
 		Favoris favoris = new Favoris();
 		favoris.setNom("nom");
@@ -129,7 +129,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = ConstraintViolationException.class)
 	@Transactional
-	public void createVoidfavoris3() {
+	public void createVoidfavoris3() throws Exception {
 		createUsers();
 
 		Utilisateur utilisateur = utilisateurDao.findUserByLogin("user1");
@@ -148,7 +148,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = ConstraintViolationException.class)
 	@Transactional
-	public void createVoidfavoris4() {
+	public void createVoidfavoris4() throws Exception {
 		createUsers();
 
 		Utilisateur utilisateur = utilisateurDao.findUserByLogin("user1");
@@ -167,7 +167,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = PersistenceException.class)
 	@Transactional
-	public void createAlreadyExistingfavoris() {
+	public void createAlreadyExistingfavoris() throws Exception {
 		createUsers();
 
 		Utilisateur utilisateur = utilisateurDao.findUserByLogin("user1");
@@ -196,7 +196,7 @@ public class FavorisDaoTest {
 
 	}
 
-	private void createTestDatas() {
+	private void createTestDatas() throws Exception {
 		createUsers();
 		createTags();
 
@@ -267,7 +267,7 @@ public class FavorisDaoTest {
 
 	@Test
 	@Transactional
-	public void listUserFavs() throws MetierException {
+	public void listUserFavs() throws Exception {
 		createTestDatas();
 
 		Utilisateur utilisateur1 = utilisateurDao.findUserByLogin("user1");
@@ -290,7 +290,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = MetierException.class)
 	@Transactional
-	public void listNullUserFavs() throws MetierException {
+	public void listNullUserFavs() throws Exception {
 		createTestDatas();
 
 		List<Favoris> favoris = favorisDao.listFavoris(null);
@@ -299,7 +299,7 @@ public class FavorisDaoTest {
 
 	@Test
 	@Transactional
-	public void listPublicFavs() {
+	public void listPublicFavs() throws Exception {
 		createTestDatas();
 
 		List<Favoris> favoris = favorisDao.listPublicFavoris();
@@ -318,7 +318,7 @@ public class FavorisDaoTest {
 
 	@Test
 	@Transactional
-	public void listFavsBy() throws MetierException {
+	public void listFavsBy() throws Exception {
 		createTestDatas();
 
 		Utilisateur utilisateur1 = utilisateurDao.findUserByLogin("user1");
@@ -441,7 +441,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = MetierException.class)
 	@Transactional
-	public void listFavsByNullParams1() throws MetierException {
+	public void listFavsByNullParams1() throws Exception {
 		createTestDatas();
 
 		Utilisateur utilisateur1 = utilisateurDao.findUserByLogin("user1");
@@ -451,7 +451,7 @@ public class FavorisDaoTest {
 
 	@Test(expected = MetierException.class)
 	@Transactional
-	public void listFavsByNullParams2() throws MetierException {
+	public void listFavsByNullParams2() throws Exception {
 		createTestDatas();
 
 		Utilisateur utilisateur1 = utilisateurDao.findUserByLogin("user1");

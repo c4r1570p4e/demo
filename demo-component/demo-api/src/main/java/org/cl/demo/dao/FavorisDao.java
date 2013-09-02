@@ -11,7 +11,7 @@ public interface FavorisDao extends GenericDao<Favoris> {
 
 	List<Favoris> listFavorisBy(Utilisateur utilisateur, String nom, Tag tag) throws MetierException;
 
-	Favoris create(Favoris favoris);
+	Favoris create(Favoris favoris) throws MetierException;
 
 	List<Favoris> listPublicFavoris();
 

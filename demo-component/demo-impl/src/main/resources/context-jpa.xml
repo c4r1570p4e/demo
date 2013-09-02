@@ -9,6 +9,7 @@
 		 
 		">
 
+	<import resource="classpath:rest-context.xml"/>
 
 	<bean id="dataSourceTarget" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -82,7 +83,6 @@
 	</bean>
 
 	<tx:annotation-driven transaction-manager="myTxManager" />
-
 
 	<context:component-scan base-package="org.cl.demo.dao,org.cl.demo.entity,org.cl.demo.exceptions,org.cl.demo.service" />
 

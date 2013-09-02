@@ -47,6 +47,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.3</version>
+		</dependency>		
 
 
 		<!--simple et replication rmi  -->
@@ -81,6 +86,7 @@
 	<modules>
 		<module>demo-war</module>
 		<module>demo-component</module>
+		<module>demo-client</module>
 	</modules>
 	
 	

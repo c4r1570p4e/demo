@@ -1,7 +1,9 @@
 package org.cl.demo.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.cl.demo.client.contenu.IControlRestClient;
 import org.cl.demo.dao.FavorisDao;
 import org.cl.demo.dao.UtilisateurDao;
 import org.cl.demo.entity.Favoris;
@@ -16,8 +18,10 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Throwables;
+
 @Component
-@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES)
+@Scope(value = "singleton", proxyMode = ScopedProxyMode.INTERFACES)
 @Transactional(rollbackFor = { MetierException.class })
 public class FavorisServiceImpl implements FavorisService {
 
@@ -26,6 +30,9 @@ public class FavorisServiceImpl implements FavorisService {
 
 	@Autowired
 	private UtilisateurDao utilisateurDao;
+
+	@Autowired
+	private IControlRestClient controlRestClient;
 
 	@Override
 	public Favoris creerFavoris(Utilisateur utilisateur, Favoris favoris) throws MetierException {
@@ -41,6 +48,10 @@ public class FavorisServiceImpl implements FavorisService {
 		if (favoris.getNom() == null) {
 			throw new MetierException("Le nom du favoris doit être renseigné");
 		} else {
+
+			if (!controlRestClient.isUrlAutorise(favoris.getUrl(), utilisateur.getDateNaissance())) {
+				throw new MetierException("Cette URL est interdite pour votre age.");
+			}
 
 			Favoris favorisFound = favorisDao.findOwnedFavoris(utilisateur, favoris.getNom());
 
@@ -72,13 +83,13 @@ public class FavorisServiceImpl implements FavorisService {
 
 		favoris.setProprietaire(null);
 
-
 		favorisDao.delete(favoris);
 
 	}
 
 	@Override
-	public Favoris modifierFavoris(Utilisateur utilisateur, Favoris favoris, String newUrl, FavorisType favorisType) throws MetierException {
+	public Favoris modifierFavoris(Utilisateur utilisateur, Favoris favoris, String newUrl, FavorisType favorisType)
+			throws MetierException {
 
 		if (utilisateur == null) {
 			throw new MetierException("utilisateur null");
@@ -90,6 +101,10 @@ public class FavorisServiceImpl implements FavorisService {
 
 		if (!favoris.getProprietaire().equals(utilisateur)) {
 			throw new MetierException("Ce favoris n'appartient pas à l'utilisateur");
+		}
+
+		if (!controlRestClient.isUrlAutorise(newUrl, utilisateur.getDateNaissance())) {
+			throw new MetierException("Cette URL est interdite pour votre age.");
 		}
 
 		favoris.setUrl(newUrl);
@@ -156,21 +171,29 @@ public class FavorisServiceImpl implements FavorisService {
 
 		if (utilisateur != null) {
 			try {
-				return favorisDao.listFavoris(utilisateur);
+				return filtrerFavorisPourUtilisateur(favorisDao.listFavoris(utilisateur),utilisateur);
 			} catch (MetierException e) {
-				e.printStackTrace();
-				// erreur innatendue
-				return null;
+				throw Throwables.propagate(e);
 			}
 		} else {
-			return favorisDao.listPublicFavoris();
+			return filtrerFavorisPourUtilisateur(favorisDao.listPublicFavoris(), null);
 		}
 	}
 
 	@Override
 	public List<Favoris> listerFavorisBy(Utilisateur utilisateur, String nom, Tag tag) throws MetierException {
-		
-		return favorisDao.listFavorisBy(utilisateur, nom, tag);
+		return filtrerFavorisPourUtilisateur(favorisDao.listFavorisBy(utilisateur, nom, tag), utilisateur);
+	}
+
+	private List<Favoris> filtrerFavorisPourUtilisateur(List<Favoris> favoriss, Utilisateur utilisateur) {
+
+		Date dateNaissance = null;
+
+		if (utilisateur != null) {
+			dateNaissance = utilisateur.getDateNaissance();
+		}
+
+		return controlRestClient.filterUrlsAutorise(favoriss, dateNaissance);
 	}
 
 	public UtilisateurDao getUtilisateurDao() {
@@ -187,6 +210,14 @@ public class FavorisServiceImpl implements FavorisService {
 
 	public void setFavorisDao(FavorisDao favorisDao) {
 		this.favorisDao = favorisDao;
+	}
+
+	public IControlRestClient getControlRestClient() {
+		return controlRestClient;
+	}
+
+	public void setControlRestClient(IControlRestClient controlRestClient) {
+		this.controlRestClient = controlRestClient;
 	}
 
 }
