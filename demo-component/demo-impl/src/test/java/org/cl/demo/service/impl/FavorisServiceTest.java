@@ -137,21 +137,21 @@ public class FavorisServiceTest {
 		mockServer
 				.expect(requestTo("http://localhost:8080/ctrl-contenu-war/url?url=" + URL1 + "&dateNaissance="
 						+ DATE_TIMER_FORMATTER.print(DATE_NAISSANCE_USER1.getTime())))
-				.andExpect(method(HttpMethod.POST)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
+				.andExpect(method(HttpMethod.GET)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
 	}
 
 	private void mockCtrlUrl2() {
 		mockServer
 				.expect(requestTo("http://localhost:8080/ctrl-contenu-war/url?url=" + URL2 + "&dateNaissance="
 						+ DATE_TIMER_FORMATTER.print(DATE_NAISSANCE_USER1.getTime())))
-				.andExpect(method(HttpMethod.POST)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
+				.andExpect(method(HttpMethod.GET)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
 	}
 
 	private void mockCtrlNewUrl() {
 		mockServer
 				.expect(requestTo("http://localhost:8080/ctrl-contenu-war/url?url=" + NEW_URL + "&dateNaissance="
 						+ DATE_TIMER_FORMATTER.print(DATE_NAISSANCE_USER1.getTime())))
-				.andExpect(method(HttpMethod.POST)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
+				.andExpect(method(HttpMethod.GET)).andRespond(withSuccess("", MediaType.APPLICATION_JSON));
 	}
 
 	private void mockFiltrerList(String fileNameIn, String fileNameOut) {

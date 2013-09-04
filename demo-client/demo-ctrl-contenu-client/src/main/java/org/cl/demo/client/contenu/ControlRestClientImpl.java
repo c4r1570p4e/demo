@@ -52,7 +52,7 @@ public class ControlRestClientImpl implements IControlRestClient {
 		String ressource = adresseServer + "/url?url={url}&dateNaissance={dateNaissance}";
 
 		try {
-			restTemplate.postForEntity(ressource, null, Void.class, url,
+			restTemplate.getForEntity(ressource, Void.class, url,
 					DATE_TIME_FORMATER.print(new DateTime(dateNaissance.getTime())));
 		} catch (HttpClientErrorException e) {
 			if (e.getStatusCode() == HttpStatus.FORBIDDEN) {
